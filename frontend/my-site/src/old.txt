@@ -1,0 +1,6 @@
+<div className="absolute inset-0 -z-10 bg-gray-800">
+        <Canvas camera={{ position: [0, 0, 50], fov: 80 }}>
+          <ambientLight />
+          <Particles count={1000} />
+        </Canvas>
+</div>
