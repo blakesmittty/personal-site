@@ -1,4 +1,4 @@
-import React, {useRef, useMemo} from "react";
+import React, {useRef, useMemo, useState, useEffect} from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { getCircleTexture } from "../getCircleTexture";
 import { useIsMobile } from "../useIsMobile";
@@ -8,8 +8,21 @@ import { useThree } from "@react-three/fiber";
 function Particles({count = 500}) {
     const mesh = useRef();
     const circleTexture = useMemo(() => getCircleTexture(), []);
-    const { pointer } = useThree();
+    const { size, viewport } = useThree();
     const isMobile = useIsMobile();
+
+    const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+    // Manual global mouse tracking
+    useEffect(() => {
+        const handleMouseMove = (event) => {
+            const x = (event.clientX / size.width) * 2 - 1;
+            const y = -(event.clientY / size.height) * 2 + 1;
+            setMouse({ x, y });
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [size]);
 
     // Generate random positions
     const positions = useMemo(() => {
@@ -30,8 +43,8 @@ function Particles({count = 500}) {
             mesh.current.rotation.y += 0.001;
             //mesh.current.rotation.x += 0.0005;
         } else {
-            mesh.current.rotation.y += (pointer.x * 0.1 - mesh.current.rotation.y) * 0.05;
-            mesh.current.rotation.x += (-pointer.y * 0.1 - mesh.current.rotation.x) * 0.05;
+            mesh.current.rotation.y += (mouse.x * 0.1 - mesh.current.rotation.y) * 0.05;
+            mesh.current.rotation.x += (-mouse.y * 0.1 - mesh.current.rotation.x) * 0.05;
         }
 
     });

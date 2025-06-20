@@ -42,7 +42,7 @@ const FrostedGlass = ({
     roundedClasses[rounded] || roundedClasses.lg,
     border ? 'border border-white/30' : '',
     'backdrop-saturate-150',
-    'shadow-xl shadow-black/20'
+    // 'shadow-xl shadow-black/20'
   ].filter(Boolean).join(' ');
 
   return (

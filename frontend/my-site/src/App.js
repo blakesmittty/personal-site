@@ -3,6 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import Particles from './components/Particles';
 import FrostedGlass from "./components/FrostedGlass";
 
+import Home from "./Home";
+import Ball from "./components/Ball";
 import About from "./components/About";
 
 
@@ -19,19 +21,7 @@ function App() {
       </div>
   
       { /* Your content */}
-      <div className="relative z-10 pointer-events-auto sm:container ">
-      {/* Your website content */}
-        <FrostedGlass 
-          blur="sm" 
-          opacity={5} 
-          border={false} 
-          rounded="2xl"
-          className="p-6"
-        >
-          <About />
-          <p className="font-menlo text-base"> hello im blake</p>
-        </FrostedGlass>
-      </div>
+      <Home />
     </div>
       
       
